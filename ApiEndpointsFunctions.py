@@ -10,7 +10,26 @@ strDomain='XXX'
 strEncrypted=''
 strToken=base64.b64decode(strEncrypted)
 
+# please uncomment the Endpoint you would like to access and add a parameter to the ID if 0, all records will be returned.
+def setEndpoint ():
+	dictAPI = {'API': GetCurrentPupilComplexDetails (), 'ID': 4111}
+	#dictAPI = {'API': GetBasicPupilDetails (), 'ID': 4111}
+	#dictAPI = {'API': GetCurrentPupilNames (), 'ID': 4111}
+	#dictAPI = {'API': GetCurrentLearnerContact (), 'ID': 4111}
+	#dictAPI = {'API': GetCurrentLearnerContactWithNames (), 'ID': 4111}
+	#dictAPI = {'API': GetPupilIdFromRollNo (), 'ID': 4111}
+	#dictAPI = {'API': GetCurrentPupilRewards (), 'ID': 4111}
+	#dictAPI = {'API': GetCurrentPupilSanctions (), 'ID': 0}
+	#dictAPI = {'API': GetCurrentPupilExamResults (), 'ID': 0}
+	#dictAPI = {'API': GetCurrentPupilExamTimetable (), 'ID': 4111}
+	#dictAPI = {'API': GetCurrentPupilUserDetails (), 'ID': 4111}
+	#dictAPI = {'API': GetCurrentACYearPupilHomework (), 'ID': 4111}
+	#dictAPI = {'API': GetPupilPhotos (), 'ID': 4111}
+	#dictAPI = {'API': GetCurrentPupilSiblings (), 'ID': 4111}
+	return dictAPI
+	
 def getInfo (srtEndpoint, strParameter, intId):
+	print (srtEndpoint, strParameter, intId)
 	request = urllib2.Request(strBaseUrl + srtEndpoint)
 	request.add_header('x-schoolbase-domain', strDomain)
 	request.add_header('x-schoolbase-token', strToken)
@@ -22,25 +41,40 @@ def getInfo (srtEndpoint, strParameter, intId):
 		result = urllib2.urlopen(request).read()
 	return result
 
-# Schoolbase API Endpoints 
-strAPI = {'Endpoint': 'PupilsFurtherDetails/GetCurrentPupilComplexDetails', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsBasicDetails/GetBasicPupilDetails', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsBasicDetails/GetCurrentPupilNames', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsBasicDetails/GetCurrentLearnerContact', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsBasicDetails/GetCurrentLearnerContactWithNames', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsBasicDetails/GetPupilIdFromRollNumber', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsDayBook/GetCurrentPupilRewards', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsDayBook/GetCurrentPupilSanctions', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsExams/GetCurrentPupilExamResults', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsExams/GetCurrentPupilExamTimetable', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsFurtherDetails/GetCurrentPupilUserDetails', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsHomework/GetCurrentACYearPupilHomework', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsFurtherDetails/GetPupilPhotos', 'Parameter': 'PupOrigNums'}
-#strAPI = {'Endpoint': 'PupilsSiblings/GetCurrentPupilSiblings', 'Parameter': 'PupOrigNums'}
+# Schoolbase API endpoints and parameters
+def GetCurrentPupilComplexDetails ():
+	return {'Endpoint': 'PupilsFurtherDetails/GetCurrentPupilComplexDetails', 'Parameter': 'PupOrigNums'}
+def GetBasicPupilDetails ():
+	return {'Endpoint': 'PupilsBasicDetails/GetBasicPupilDetails', 'Parameter': 'PupOrigNums'}
+def GetCurrentPupilNames ():
+	return {'Endpoint': 'PupilsBasicDetails/GetCurrentPupilNames', 'Parameter': 'PupOrigNums'}
+def GetCurrentLearnerContact ():
+	return {'Endpoint': 'PupilsBasicDetails/GetCurrentLearnerContact', 'Parameter': 'PupOrigNums'}
+def GetCurrentLearnerContactWithNames ():
+	return {'Endpoint': 'PupilsBasicDetails/GetCurrentLearnerContactWithNames', 'Parameter': 'PupOrigNums'}
+def GetPupilIdFromRollNumber ():
+	return {'Endpoint': 'PupilsBasicDetails/GetPupilIdFromRollNo', 'Parameter': 'PupOrigNums'}
+def GetCurrentPupilRewards ():
+	return {'Endpoint': 'PupilsDayBook/GetCurrentPupilRewards', 'Parameter': 'PupOrigNums'}
+def GetCurrentPupilSanctions ():
+	return {'Endpoint': 'PupilsDayBook/GetCurrentPupilSanctions', 'Parameter': 'PupOrigNums'}
+def GetCurrentPupilExamResults ():
+	return {'Endpoint': 'PupilsExam/GetCurrentPupilExamResults', 'Parameter': 'PupOrigNums'}
+def GetCurrentPupilExamTimetable ():
+	return {'Endpoint': 'PupilsExam/GetCurrentPupilExamTimetable', 'Parameter': 'PupOrigNums'}
+def GetCurrentPupilUserDetails ():
+	return {'Endpoint': 'PupilsFurtherDetails/GetCurrentPupilUserDetails', 'Parameter': 'PupOrigNums'}
+def GetCurrentACYearPupilHomework ():
+	return {'Endpoint': 'PupilsHomework/GetCurrentACYearPupilHomework', 'Parameter': 'PupOrigNums'}
+def GetPupilPhotos ():
+	return {'Endpoint': 'PupilsFurtherDetails/GetPupilPhotos', 'Parameter': 'PupOrigNums'}
+def GetCurrentPupilSiblings ():
+	return {'Endpoint': 'PupilsSiblings/GetCurrentPupilSiblings', 'Parameter': 'PupOrigNums'}
 
+# set endpoint and parameters
+apiInfo = setEndpoint ()
 # access Schoolbase api and collect data
-objJson=json.loads(getInfo(strAPI['Endpoint'], strAPI['Parameter'], 4111))
-#objJson=json.loads(getInfo(srtEndpoint, '', ''))
+objJson=json.loads(getInfo (apiInfo['API']['Endpoint'], apiInfo['API']['Parameter'], apiInfo['ID'] ))
 
 # Sort the JSON object
 #sorted(objJson, key = lambda i: i['LastName']) 
