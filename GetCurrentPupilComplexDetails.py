@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+# Written by Heiko Horn 2019.03.15
 import urllib2, json, base64, urllib
 
 # define variable
