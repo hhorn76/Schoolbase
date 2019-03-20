@@ -52,7 +52,7 @@ def GetCurrentLearnerContact ():
 	return {'Endpoint': 'PupilsBasicDetails/GetCurrentLearnerContact', 'Parameter': 'PupOrigNums'}
 def GetCurrentLearnerContactWithNames ():
 	return {'Endpoint': 'PupilsBasicDetails/GetCurrentLearnerContactWithNames', 'Parameter': 'PupOrigNums'}
-def GetPupilIdFromRollNumber ():
+def GetPupilIdFromRollNo ():
 	return {'Endpoint': 'PupilsBasicDetails/GetPupilIdFromRollNo', 'Parameter': 'PupOrigNums'}
 def GetCurrentPupilRewards ():
 	return {'Endpoint': 'PupilsDayBook/GetCurrentPupilRewards', 'Parameter': 'PupOrigNums'}
